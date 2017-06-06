@@ -22,4 +22,12 @@ class RecipeTest < Minitest::Test
     r.add_ingredient("Flour", 500)
     assert_equal 500, r.amount_required("Flour")
   end
+
+  def test_it_can_create_a_new_recipie
+    r = Recipe.new("Spicy Cheese Pizza")
+    r.add_ingredient("Cayenne Pepper", 0.025)
+    r.add_ingredient("Cheese", 75)
+    r.add_ingredient("Flour", 500)
+  end
+  
 end
