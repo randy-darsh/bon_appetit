@@ -5,7 +5,7 @@ class Pantry
 
   attr_reader   :item,
                 :stock,
-                :r
+                :recipe
   attr_accessor :restock,
                 :amount,
                 :stock_check
@@ -25,8 +25,15 @@ class Pantry
   end
 
   def convert_units(r)
-    r.ingredients.keys.each do |key, value|
-      key.store :quantity, value
+    r.ingredients.group_by do |ingredient, value|
+      if ingredient[value] > 100
+        ingredient[:amount][:units] = "Centi-Units"
+      elsif ingredient[value] < 1
+        ingredient[:amount][:units] = "Milli-Units"
+      else
+        ingredient[:amount][:units] = "Universal Units"
+      end
     end
   end
+
 end
