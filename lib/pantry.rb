@@ -25,12 +25,8 @@ class Pantry
   end
 
   def convert_units(r)
-    r.ingredients.keys.each do |key|
-      key.each do |ingredient|
-        ingredient = Hash.new{|hash, key| hash[key] = {} }
-          quantity[:quantity] = "Centi-Units"
-      end
-
+    r.ingredients.keys.each do |key, value|
+      key.store :quantity, value
     end
   end
 end
