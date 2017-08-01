@@ -1,3 +1,5 @@
+require './lib/pantry'
+
 class Recipe
   attr_reader :name, :ingredients
 
@@ -17,4 +19,5 @@ class Recipe
   def amount_required(ingredient_name)
     @ingredients[ingredient_name]
   end
+
 end

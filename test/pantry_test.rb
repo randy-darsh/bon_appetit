@@ -9,6 +9,10 @@ class PantryTest < Minitest::Test
 
   def setup
     @pantry = Pantry.new("Cheese", 10)
+    @r = Recipe.new("Spicy Cheese Pizza")
+    @r.add_ingredient("Cayenne Pepper", 0.025)
+    @r.add_ingredient("Cheese", 75)
+    @r.add_ingredient("Flour", 500)
   end
 
   def test_it_exists
@@ -44,18 +48,21 @@ class PantryTest < Minitest::Test
   def test_it_can_add_to_stock
     @pantry
 
-    assert_equal @pantry.restock("Cheese", 10), 10
+    assert_equal @pantry.restock("Cheese", 10), 20
   end
 
   def test_it_can_add_more_to_stock
     @pantry
 
-    assert_equal @pantry.restock("Cheese", 20), 20
+    assert_equal @pantry.restock("Cheese", 20), 30
   end
 
-  def test_it_can_convert_units(r)
+  def test_it_can_convert_units
     @pantry
-
+binding.pry
+    assert_equal @pantry.convert_units(@r), {"Cayenne Pepper" => {quantity: 25, units: "Milli-Units"},
+                                             "Cheese"         => {quantity: 75, units: "Universal Units"},
+                                             "Flour"          => {quantity: 5, units: "Centi-Units"}}
   end
 
 end
